@@ -1,16 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Thhhe</title>
+    <title>Mário</title>
+    <style>
+        #mario {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 50px;
+            background-color: red;
+        }
+    </style>
 </head>
 <body>
+<div id="mario"></div>
 
+<script>
+    const mario = document.getElementById('mario');
+    let isJumping = false;
+    let gravity = 0.9;
+    let speed = 20;
+    let position = 0;
 
-test
-ttttrrrrt
+    function jump() {
+        if (!isJumping) {
+            isJumping = true;
+            setInterval(function() {
+                position -= speed;
+                speed -= gravity;
+                mario.style.bottom = position + 'px';
+                if (position <= 0) {
+                    clearInterval();
+                    isJumping = false;
+                    position = 0;
+                    speed = 20;
+                }
+            }, 10);
+        }
+    }
 
-22222
-
+    document.addEventListener('keydown', function(e) {
+        if (e.keyCode == 32) {
+            jump();
+        }
+    });
+</script>
 </body>
 </html>
